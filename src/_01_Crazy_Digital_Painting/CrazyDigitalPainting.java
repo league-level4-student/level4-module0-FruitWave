@@ -12,7 +12,7 @@ public class CrazyDigitalPainting {
 	// 2. Create a 2D array of Color objects. You will need to import
 	// java.awt.Color. Initialize the size of the array using the
 	// integers created in step 1.
-	Color[][] marshmallotomas = new Color[theFarthestWidthistanceInTheLand][theFarthestHeighsistanceInTheLand];
+	static Color[][] marshmallotomas = new Color[theFarthestWidthistanceInTheLand][theFarthestHeighsistanceInTheLand];
 
 	public CrazyDigitalPainting() {
 		// 3. Open the crazy_digital_painting.png file and look at the image.
@@ -23,7 +23,8 @@ public class CrazyDigitalPainting {
 		// colors[i][j] = new Color(i % 256, (i * j) % 256, j % 256);
 		for (int i = 0; i < marshmallotomas.length; i++) {
 			for (int j = 0; j < marshmallotomas[i].length; j++) {
-
+				marshmallotomas[i][j] = new Color(Math.abs(((i - 100) % (j - 1000)) % 256),
+						(((j ^ 2 * i) + 1) % 2) % 255, ((j + i ^ 2) % (200 + j)) % 255);
 			}
 		}
 
@@ -35,5 +36,6 @@ public class CrazyDigitalPainting {
 
 	public static void main(String[] args) {
 		new CrazyDigitalPainting();
+		new ColorArrayDisplayer().displayColorsAsImage(marshmallotomas);
 	}
 }
