@@ -1,15 +1,18 @@
 package _02_Pixel_Art;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
+import javax.swing.Timer;
 
 public class PixelArtMaker implements MouseListener {
 	private JFrame window;
 	private GridInputPanel gip;
-	private GridPanel gp;
+	GridPanel gp;
 	ColorSelectionPanel csp;
 
 	public void start() {
@@ -22,6 +25,7 @@ public class PixelArtMaker implements MouseListener {
 		window.pack();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		window.setVisible(true);
+
 	}
 
 	public void submitGridData(int w, int h, int r, int c) {
@@ -66,4 +70,5 @@ public class PixelArtMaker implements MouseListener {
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
+
 }
