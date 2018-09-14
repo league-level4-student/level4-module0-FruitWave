@@ -112,7 +112,45 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// It returns an array list of the 8 or less neighbors of the
 	// cell identified by x and y
 	public int getLivingNeighbors(int x, int y) {
-		return 0;
+		int returnable = 0;
+		boolean directixRight = true;
+
+		int xtemp;
+		switch (x) {
+		case 0:
+			xtemp = x;
+			break;
+		case ConwaysGameOfLife.WIDTH:
+			xtemp = x;
+		default:
+			xtemp = x - 1;
+			break;
+		}
+		int ytemp;
+		boolean directrixDown = true;
+		switch (y) {
+		case 0:
+			ytemp = y;
+			break;
+		case ConwaysGameOfLife.HEIGHT:
+			ytemp = y;
+			directrixDown = false;
+		default:
+			ytemp = y - 1;
+			break;
+		}
+		for (int x2 = xtemp; x2 <= x + 1; x2 += directixRight ? 1 : -1) {
+			Cell[][] temp_ra = new Cell[cellArr.length][cellArr.length];
+
+			for (int y2 = ytemp; y2 <= y + 1; y2 += directrixDown ? 1 : -1) {
+				if (!((x2 == x) && (y2 == y))) {
+					temp_ra[x2][y2] = new Cell(x2, y2, cellSize);
+					returnable++;
+				}
+
+			}
+		}
+		return returnable;
 		// do this next
 	}
 
