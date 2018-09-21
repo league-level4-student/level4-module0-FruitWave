@@ -113,43 +113,27 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 	// cell identified by x and y
 	public int getLivingNeighbors(int x, int y) {
 		int returnable = 0;
-		boolean directixRight = true;
+		int xScan = x - 1;
+		int yScan = y - 1;
+		// for loop moves from cell left to cell right = true
 
-		int xtemp;
-		switch (x) {
-		case 0:
-			xtemp = x;
-			break;
-		case ConwaysGameOfLife.WIDTH:
-			xtemp = x;
-		default:
-			xtemp = x - 1;
-			break;
-		}
-		int ytemp;
-		boolean directrixDown = true;
-		switch (y) {
-		case 0:
-			ytemp = y;
-			break;
-		case ConwaysGameOfLife.HEIGHT:
-			ytemp = y;
-			directrixDown = false;
-		default:
-			ytemp = y - 1;
-			break;
-		}
-		for (int x2 = xtemp; x2 <= x + 1; x2 += directixRight ? 1 : -1) {
-			Cell[][] temp_ra = new Cell[cellArr.length][cellArr.length];
+		Cell[][] temp_ra = new Cell[cellArr.length][cellArr.length];
+		for (int i = 0; i <= 2; i++) {
 
-			for (int y2 = ytemp; y2 <= y + 1; y2 += directrixDown ? 1 : -1) {
-				if (!((x2 == x) && (y2 == y))) {
-					temp_ra[x2][y2] = new Cell(x2, y2, cellSize);
-					returnable++;
+			for (int j = 0; j <= 2; j++) {
+
+				if (!((xScan == x) && (yScan == y)) && !(yScan + j < 0) && !(xScan + i < 0)
+						&& !(yScan + j > ConwaysGameOfLife.HEIGHT) && !(xScan + i > ConwaysGameOfLife.WIDTH)) {
+					System.out.println("xscan + i = " + (xScan + i) + ", yscan + j = " + (yScan + j) + " i is " + i
+							+ " j is " + j);
+					temp_ra[xScan + i][yScan + j] = new Cell(xScan + i, yScan + j, cellSize);
+					returnable += temp_ra[xScan + i][yScan + j].isAlive ? 1 : 0;
+					System.out.println("return temp = " + returnable);
 				}
-
 			}
+
 		}
+		System.out.println("return final = " + returnable);
 		return returnable;
 		// do this next
 	}
