@@ -48,11 +48,13 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 
 	public void randomizeCells() {
 		// 4. Iterate through each cell and randomly set each
-		// cell's isAlive memeber to true of false
+		// cell's isAlive memeber to true or false
 		for (int i = 0; i < cellArr.length; i++) {
 			for (int j = 0; j < cellArr.length; j++) {
 				boolean bool = new Random().nextBoolean();
+
 				cellArr[i][j].isAlive = bool;
+				System.out.println(bool);
 			}
 		}
 		repaint();
@@ -115,20 +117,20 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		int returnable = 0;
 		int xScan = x - 1;
 		int yScan = y - 1;
-		// for loop moves from cell left to cell right = true
 
 		Cell[][] temp_ra = new Cell[cellArr.length][cellArr.length];
 		for (int i = 0; i <= 2; i++) {
 
 			for (int j = 0; j <= 2; j++) {
 
-				if (!((xScan == x) && (yScan == y)) && !(yScan + j < 0) && !(xScan + i < 0)
-						&& !(yScan + j > ConwaysGameOfLife.HEIGHT) && !(xScan + i > ConwaysGameOfLife.WIDTH)) {
-					System.out.println("xscan + i = " + (xScan + i) + ", yscan + j = " + (yScan + j) + " i is " + i
-							+ " j is " + j);
-					temp_ra[xScan + i][yScan + j] = new Cell(xScan + i, yScan + j, cellSize);
-					returnable += temp_ra[xScan + i][yScan + j].isAlive ? 1 : 0;
-					System.out.println("return temp = " + returnable);
+				if (!((xScan == x) && (yScan == y)) && !(yScan + j <= 0) && !(xScan + i <= 0)
+						&& !(yScan + j >= ConwaysGameOfLife.HEIGHT) && !(xScan + i >= ConwaysGameOfLife.WIDTH)) {
+					// temp_ra[xScan + i][yScan + j] = new Cell(xScan + i, yScan + j, cellSize);
+					if (!(xScan + i == 50) && !(yScan + j == 50)) {
+						returnable += cellArr[xScan + i][yScan + j].isAlive ? 1 : 0;
+						System.out.println("return temp = " + returnable);
+					}
+
 				}
 			}
 
@@ -160,7 +162,8 @@ public class WorldPanel extends JPanel implements MouseListener, ActionListener 
 		// 10. Use e.getX() and e.getY() to determine
 		// which cell is clicked. Then toggle
 		// the isAlive variable for that cell.
-
+		cellArr[e.getX() / cellSize][e.getY()
+				/ cellSize].isAlive = !cellArr[e.getX() / cellSize][e.getY() / cellSize].isAlive;
 		repaint();
 	}
 

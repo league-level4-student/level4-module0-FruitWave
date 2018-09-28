@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Cell implements Drawable {
 	public boolean isAlive = false;
-
+	Color rand = new Color(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
 	private int x;
 	private int y;
 
@@ -55,8 +55,13 @@ public class Cell implements Drawable {
 	// draws empty square if cell is dead
 	@Override
 	public void draw(Graphics g) {
-		Color rand = new Color(new Random().nextInt(255), new Random().nextInt(255), new Random().nextInt(255));
-		g.setColor(rand);
+		if (isAlive) {
+
+			g.setColor(rand);
+		} else {
+			g.setColor(Color.white);
+		}
+
 		g.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
 	}
 }
