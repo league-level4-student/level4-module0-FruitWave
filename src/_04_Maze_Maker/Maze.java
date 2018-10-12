@@ -28,7 +28,8 @@ public class Maze {
 	public void draw(Graphics g) {
 		for (int i = 0; i < maza.length; i++) {
 			for (int j = 0; j < maza[i].length; j++) {
-				g.drawRect(i, j, width, height);
+			//	g.drawRect(i, j, width, height);
+				maza[i][j].draw(g);
 			}
 		}
 	}
