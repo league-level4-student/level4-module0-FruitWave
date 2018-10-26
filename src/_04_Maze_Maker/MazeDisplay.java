@@ -32,6 +32,7 @@ public class MazeDisplay extends JPanel{
 	
 	@Override
 	public void paintComponent(Graphics g){
+		
 		maze.draw(g);
 	}
 	
